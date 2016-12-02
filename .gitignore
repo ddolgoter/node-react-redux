@@ -1,2 +1,8 @@
 node_modules
 npm-debug.log
+
+# ignore Visual Studio files
+typings
+*.sln
+*.njsproj
+*.vs
