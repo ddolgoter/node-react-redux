@@ -1,6 +1,7 @@
 ﻿import React from 'react'
 import { connect } from 'react-redux'
 import { loadApp } from '../actions/appActions'
+import Quiz from './quiz'
 
 class App extends React.Component {
     constructor()
@@ -13,12 +14,14 @@ class App extends React.Component {
     }
 
     render() {
-        return <p>{this.props.text}</p>;
+        return <div>
+            <p>{this.props.text}</p>
+            <Quiz/>
+        </div>
     }
 }
 
 var mapStateToProps = function (state) {
-    console.log(state);
     return {
         text: state.app.text
     }
