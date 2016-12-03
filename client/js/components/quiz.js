@@ -10,8 +10,7 @@ class Quiz extends React.Component {
 
     render() {
         return <div>
-            <p>{ this.props.status } {this.props.questions.length}</p>
-            <ul>{ this.props.questions }</ul>
+            <div className="container">{ this.props.questions }</div>
         </div>;
     }
 }
@@ -19,7 +18,8 @@ class Quiz extends React.Component {
 var mapStateToProps = function (state) {
     return {
         status: state.quiz.status,
-        questions: state.quiz.questions.map((q, i) => <Question key={i} text={q.text} answers={q.answers} />)
+        questions: state.quiz.questions.map((question, index) =>
+            <Question key={index} text={question.text} answers={question.answers} />)
     }
 }
 

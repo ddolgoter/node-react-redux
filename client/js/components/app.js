@@ -1,7 +1,9 @@
 ﻿import React from 'react'
 import { connect } from 'react-redux'
 import { loadApp } from '../actions/appActions'
+import Header from './header'
 import Quiz from './quiz'
+import Footer from './footer'
 
 class App extends React.Component {
     constructor()
@@ -14,9 +16,10 @@ class App extends React.Component {
     }
 
     render() {
-        return <div>
-            <p>{this.props.text}</p>
+        return <div className="container">
+            <Header/>
             <Quiz/>
+            <Footer/>
         </div>
     }
 }

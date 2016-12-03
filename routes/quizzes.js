@@ -1,7 +1,7 @@
 ﻿var sampleQuiz = [
     { text: "What color is the sky?", answers: ["Blue", "Cyan", "Green", "Red"] },
-    { text: "Is the tomato a fruit?", answers: ["Yes", "No"] },
-    { text: "What is the dryest continent?", answers: ["Africa", "Australia", "The Antarctic"] },
+    { text: "Is tomato a fruit or a vegetable?", answers: ["Fruit", "Vegetable"] },
+    { text: "What is the driest continent?", answers: ["Africa", "Australia", "Antarctica"] },
 ]
 
 function getQuiz(req, res) {

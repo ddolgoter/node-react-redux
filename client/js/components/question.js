@@ -2,13 +2,16 @@
 
 class Question extends React.Component {
     render() {
-        const answers = this.props.answers.map((a, i) => <li key={i}> {a} </li>)
+        const answers = this.props.answers.map((answer, index) => <li key={index} className="col-md-6">
+            <div className="answer">{answer}</div>
+        </li>)
 
-        return <li>{ this.props.text }
-            <ul>
+        return <div>
+            <div className="question row">{ this.props.text }</div>
+            <ul className="row">
                 {answers}
             </ul>
-        </li>
+        </div>
     }
 }
 
