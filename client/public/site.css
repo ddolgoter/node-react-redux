@@ -20,3 +20,13 @@ ul {
     line-height: 40px;
     margin: 10px -5px;
 }
+
+.answer:hover {
+    cursor: pointer;
+    background-color:gainsboro;
+}
+
+.answer.selected {
+    background-color: brown;
+    color: white;
+}

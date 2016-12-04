@@ -1,5 +1,5 @@
 ﻿var sampleQuiz = [
-    { text: "What color is the sky?", answers: ["Blue", "Cyan", "Green", "Red"] },
+    { text: "What color is the sky?", answers: ["Blue", "Beige", "Green", "Red"] },
     { text: "Is tomato a fruit or a vegetable?", answers: ["Fruit", "Vegetable"] },
     { text: "What is the driest continent?", answers: ["Africa", "Australia", "Antarctica"] },
 ]

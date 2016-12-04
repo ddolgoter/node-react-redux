@@ -12,3 +12,10 @@ export function getQuiz() {
             })
     }
 }
+
+export function selectAnswer(questionId, answerId) {
+    return {
+        type: 'SELECT_ANSWER',
+        payload: {questionId, answerId}
+    }
+}

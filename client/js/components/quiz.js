@@ -19,7 +19,7 @@ var mapStateToProps = function (state) {
     return {
         status: state.quiz.status,
         questions: state.quiz.questions.map((question, index) =>
-            <Question key={index} text={question.text} answers={question.answers} />)
+            <Question key={index} id={index} text={question.text} selectedAnswer={question.selectedAnswer} answers={question.answers} />)
     }
 }
 
