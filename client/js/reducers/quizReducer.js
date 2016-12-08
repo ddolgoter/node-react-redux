@@ -33,9 +33,10 @@
             return newState
         }
         case "SELECT_NEXT_QUESTION": {
-            //can't move next from last question
-            if (state.currentQuestionIdx === state.questions.length - 1)
-                return state;
+            //can't move next from last question or if the question is unanswered
+            if (state.currentQuestionIdx === state.questions.length - 1 ||
+                (state.currentQuestionIdx >= 0 && state.questions[state.currentQuestionIdx] === undefined))
+                return state
 
             return Object.assign({}, state, {
                 currentQuestionIdx: state.currentQuestionIdx + 1

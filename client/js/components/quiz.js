@@ -4,6 +4,11 @@ import { getQuiz, selectPreviousQuestion, selectNextQuestion } from '../actions/
 import Question from './question';
 
 class Quiz extends React.Component {
+
+    constructor(props) {
+        super(props);       
+    }
+
     componentWillMount() {
         this.props.dispatch(getQuiz());
     }
@@ -16,13 +21,36 @@ class Quiz extends React.Component {
         this.props.dispatch(selectPreviousQuestion());
     }
 
+    currentQuestion() {
+        return this.props.questions[this.props.currentQuestionIdx]
+    }
+
+    buttonPreviousClasses() {
+        let classes = "btn button-default";
+
+        if (this.props.currentQuestionIdx === 0)
+            classes = classes + " disabled";
+
+        return classes;
+    }
+
+    buttonNextClasses() {
+        let classes = "btn button-default";
+
+        if (this.props.currentQuestionIdx === this.props.questions.length - 1 ||
+            this.currentQuestion().selectedAnswer === undefined)
+            classes = classes + " disabled";
+
+        return classes;
+    }
+
     render() {
         let status = this.props.status
 
         if (status !== 'Loaded')
             return <div className="loading">{status}</div>
 
-        var question = this.props.questions[this.props.currentQuestionIdx]
+        let question = this.currentQuestion();
 
         return <div className="loaded">
             <div className="container">
@@ -32,8 +60,8 @@ class Quiz extends React.Component {
                     answers={question.answers} />
             </div>
             <div className="container button-panel">
-                <button className="btn button-default" onClick={this.previousQuestion.bind(this)}>Previous</button>
-                <button className="btn button-default"  onClick={this.nextQuestion.bind(this)}>Next</button>
+                <button className={this.buttonPreviousClasses()} onClick={this.previousQuestion.bind(this) }>Previous</button>
+                <button className={this.buttonNextClasses()}  onClick={this.nextQuestion.bind(this)}>Next</button>
             </div>
         </div>;
     }
