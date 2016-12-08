@@ -1,6 +1,6 @@
 ﻿import React from 'react'
 import { connect } from 'react-redux'
-import { getQuiz } from '../actions/quizActions'
+import { getQuiz, selectPreviousQuestion, selectNextQuestion } from '../actions/quizActions'
 import Question from './question';
 
 class Quiz extends React.Component {
@@ -8,9 +8,33 @@ class Quiz extends React.Component {
         this.props.dispatch(getQuiz());
     }
 
+    nextQuestion() {
+        this.props.dispatch(selectNextQuestion());
+    }
+
+    previousQuestion() {
+        this.props.dispatch(selectPreviousQuestion());
+    }
+
     render() {
-        return <div>
-            <div className="container">{ this.props.questions }</div>
+        let status = this.props.status
+
+        if (status !== 'Loaded')
+            return <div className="loading">{status}</div>
+
+        var question = this.props.questions[this.props.currentQuestionIdx]
+
+        return <div className="loaded">
+            <div className="container">
+                <Question id={this.props.currentQuestionIdx}
+                    text={question.text}
+                    selectedAnswer={question.selectedAnswer}
+                    answers={question.answers} />
+            </div>
+            <div className="container button-panel">
+                <button className="btn button-default" onClick={this.previousQuestion.bind(this)}>Previous</button>
+                <button className="btn button-default"  onClick={this.nextQuestion.bind(this)}>Next</button>
+            </div>
         </div>;
     }
 }
@@ -18,8 +42,8 @@ class Quiz extends React.Component {
 var mapStateToProps = function (state) {
     return {
         status: state.quiz.status,
-        questions: state.quiz.questions.map((question, index) =>
-            <Question key={index} id={index} text={question.text} selectedAnswer={question.selectedAnswer} answers={question.answers} />)
+        currentQuestionIdx: state.quiz.currentQuestionIdx,
+        questions: state.quiz.questions
     }
 }
 

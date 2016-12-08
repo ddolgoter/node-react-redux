@@ -30,3 +30,12 @@ ul {
     background-color: brown;
     color: white;
 }
+
+.button-panel {
+    text-align: center;
+}
+
+.button-panel button {
+    margin: 0 5px;
+    width: 80px;
+}

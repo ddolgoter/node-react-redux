@@ -6,9 +6,9 @@ import Quiz from './quiz'
 import Footer from './footer'
 
 class App extends React.Component {
-    constructor()
+    constructor(props)
     {
-        super();
+        super(props);
 
         setTimeout(() => {
             this.props.dispatch(loadApp());
