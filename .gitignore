@@ -3,6 +3,7 @@ npm-debug.log
 
 # ignore Visual Studio files
 typings
+obj
 *.sln
 *.njsproj
 *.vs
