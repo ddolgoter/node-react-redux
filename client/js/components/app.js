@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { loadApp } from '../actions/appActions'
 import Header from './header'
 import Quiz from './quiz'
+import QuizScore from './quizScore'
 import Footer from './footer'
 
 class App extends React.Component {
@@ -16,9 +17,17 @@ class App extends React.Component {
     }
 
     render() {
+
+        let content = null
+        if (this.props.quizFinished) {
+            content = <QuizScore/>
+        } else {
+            content = <Quiz/>
+        }
+
         return <div className="container">
             <Header/>
-            <Quiz/>
+            {content}
             <Footer/>
         </div>
     }
@@ -26,7 +35,8 @@ class App extends React.Component {
 
 var mapStateToProps = function (state) {
     return {
-        text: state.app.text
+        text : state.app.text,
+        quizFinished : state.quiz.quizFinished === true
     }
 }
 

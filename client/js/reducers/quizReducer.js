@@ -34,12 +34,13 @@
         }
         case "SELECT_NEXT_QUESTION": {
             //can't move next from last question or if the question is unanswered
-            if (state.currentQuestionIdx === state.questions.length - 1 ||
-                (state.currentQuestionIdx >= 0 && state.questions[state.currentQuestionIdx] === undefined))
+            if (state.currentQuestionIdx >= 0 && state.questions[state.currentQuestionIdx] === undefined) {
                 return state
+            }
 
             return Object.assign({}, state, {
-                currentQuestionIdx: state.currentQuestionIdx + 1
+                currentQuestionIdx: state.currentQuestionIdx + 1,
+                lastQuestion: state.currentQuestionIdx + 1 === state.questions.length - 1
             })
         }
         case "SELECT_PREVIOUS_QUESTION": {
@@ -50,6 +51,19 @@
 
             return Object.assign({}, state, {
                 currentQuestionIdx: state.currentQuestionIdx - 1
+            })
+        }
+        case "FINISH_QUIZ": {
+
+            let score = state.questions.reduce((sum, question, index) => {                
+                var selectedAnswerScore = question.answers[question.selectedAnswer].score;
+                return (selectedAnswerScore) ? sum + selectedAnswerScore : sum + 0
+            }, 0)
+
+            return Object.assign({}, state, {
+                quizScore: score,
+                maxScore: state.questions.length,
+                quizFinished: true
             })
         }
     }

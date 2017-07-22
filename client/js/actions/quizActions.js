@@ -35,3 +35,10 @@ export function selectPreviousQuestion() {
         payload: {}
     }
 }
+
+export function finishQuiz() {
+    return {
+        type: 'FINISH_QUIZ',
+        payload: {}
+    }
+}

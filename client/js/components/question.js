@@ -15,7 +15,7 @@ class Question extends React.Component {
 
             return <li key={index} id={index}
                 className="col-md-6">
-                <div className={answerClasses} onClick={this.selectAnswer.bind(this, index) }>{answer}</div>
+                <div className={answerClasses} onClick={this.selectAnswer.bind(this, index) }>{answer.text}</div>
             </li>
         })
 

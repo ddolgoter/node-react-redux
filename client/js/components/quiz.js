@@ -1,24 +1,28 @@
 ﻿import React from 'react'
 import { connect } from 'react-redux'
-import { getQuiz, selectPreviousQuestion, selectNextQuestion } from '../actions/quizActions'
+import { getQuiz, selectPreviousQuestion, selectNextQuestion, finishQuiz } from '../actions/quizActions'
 import Question from './question';
 
 class Quiz extends React.Component {
 
     constructor(props) {
-        super(props);       
+        super(props)
     }
 
     componentWillMount() {
-        this.props.dispatch(getQuiz());
+        this.props.dispatch(getQuiz())
     }
 
     nextQuestion() {
-        this.props.dispatch(selectNextQuestion());
+        this.props.dispatch(selectNextQuestion())
     }
 
     previousQuestion() {
-        this.props.dispatch(selectPreviousQuestion());
+        this.props.dispatch(selectPreviousQuestion())
+    }
+
+    finishQuiz(){
+        this.props.dispatch(finishQuiz())
     }
 
     currentQuestion() {
@@ -37,8 +41,7 @@ class Quiz extends React.Component {
     buttonNextClasses() {
         let classes = "btn button-default";
 
-        if (this.props.currentQuestionIdx === this.props.questions.length - 1 ||
-            this.currentQuestion().selectedAnswer === undefined)
+        if (this.currentQuestion().selectedAnswer === undefined)
             classes = classes + " disabled";
 
         return classes;
@@ -49,6 +52,11 @@ class Quiz extends React.Component {
 
         if (status !== 'Loaded')
             return <div className="loading">{status}</div>
+
+        let secondButton = <button className={this.buttonNextClasses()}  onClick={this.nextQuestion.bind(this)}>Next</button>
+        if (this.props.lastQuestion) {
+            secondButton = <button className={this.buttonNextClasses()}  onClick={this.finishQuiz.bind(this)}>Finish</button>
+        } 
 
         let question = this.currentQuestion();
 
@@ -61,7 +69,7 @@ class Quiz extends React.Component {
             </div>
             <div className="container button-panel">
                 <button className={this.buttonPreviousClasses()} onClick={this.previousQuestion.bind(this) }>Previous</button>
-                <button className={this.buttonNextClasses()}  onClick={this.nextQuestion.bind(this)}>Next</button>
+                {secondButton}
             </div>
         </div>;
     }
@@ -71,7 +79,8 @@ var mapStateToProps = function (state) {
     return {
         status: state.quiz.status,
         currentQuestionIdx: state.quiz.currentQuestionIdx,
-        questions: state.quiz.questions
+        questions: state.quiz.questions,
+        lastQuestion: state.quiz.lastQuestion
     }
 }
 
